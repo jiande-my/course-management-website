@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+        {% if category=="register" %}
+            <div  class="alert alert-success" role="alert">
+            {{ message }}
+            </div>
+        {% elif category=="remove" %}
+            <div  class="alert alert-danger" role="alert">
+            {{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    {% if studentID %}
+    <div class="account">
+        <div class="row">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+            </svg>
+            <div class="account-text">
+                <strong>
+                    <h1>{{ studentID }}</h1>
+                </strong>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="container-fluid">
+        <h1>My Course</h1>
+        {% if courses %}
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">Course ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Section</th>
+                    <th scope="col">lecturer</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+                    <!-- <th scope="col">Enroll</th> -->
+                </tr>
+                </thead>
+
+                <tbody>
+                <!-- Construct the rest of courses here -->
+                {% for course in courses %}
+                <tr>
+                    <td scope='row'>{{ course["courseID"] }}</td>
+                    <td>{{ course["courseName"] }}</td>
+                    <td>{{ course["section"] }}</td>
+                    <td>{{ course["lecturer"] }}</td>
+                    <td>{{ course["date"] }}</td>
+                    <td>{{ course["time"] }}</td>
+                    <!-- <td>
+                        <form action="{{url_for('section')}}" method="GET">
+                            <input type="hidden" name="courseID" value="{{ course['courseID'] }}">
+                            <input type="hidden" name="title" value="{{course[1]}}">
+                            <input type="hidden" name="section" value="{{course[2]}}">
+                            <button>Section</button>
+                        </form>
+                    </td> -->
+                </tr>
+                {% endfor %}
+                
+                </tbody>
+            </table>
+        </div>
+
+        {% else %}
+        <div class="center">
+            <p>No Course Registered</p>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+{% endblock %}

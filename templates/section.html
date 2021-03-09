@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Section:{{ courseID }}
+{% endblock %}
+
+
+{% block content %}
+<h1>Course Offerings</h1>
+
+<div>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Course ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Section</th>
+            <th scope="col">Lecturer</th>
+            <!-- <th scope="col">Time</th> -->
+            <th scope="col">Enroll</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <!-- Construct the rest of courses here -->
+        {% for section in sections %}
+        <tr>
+            <td scope='row'>{{ section["courseID"] }}</td>
+            <td>{{ section["courseName"] }}</td>
+            <td>{{ section["section"] }}</td>
+            <td>{{ section["lecturer"] }}</td>
+            <!-- <td>{{ section[4] }}</td> -->
+            <td>
+                <form action="{{ url_for('enrollment') }}" method="GET">
+                    <input type="hidden" name="courseID" value="{{ section['courseID'] }}">
+                    <input type="hidden" name="section" value="{{ section['section'] }}">
+                <button>Enroll</button>
+            </form>
+            </td>
+        </tr>
+        {% endfor %}
+        
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

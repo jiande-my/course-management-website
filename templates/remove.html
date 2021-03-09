@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Remove
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    {% if courses %}
+    <h2>Course to Remove</h2>
+    <form action="/remove" method="POST">
+        <select name="course" id="course">
+            {% for course in courses %}
+            <option value="{{ course }}">{{ course }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <br>
+        <button>Remove</button>
+    </form>
+    {% else %}
+    <div  class="alert alert-danger" role="alert">
+        <h2>No Course Registered Yet!</h2>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

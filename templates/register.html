@@ -1,0 +1,50 @@
+{% extends "layout2.html" %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block content %}
+<body>
+  <form class="form-signin" action="/register" method="POST">
+    <div class="text-center mb-4">
+      <a class="h1 mb-3 font-weight-normal" href="/home">FKE</a>
+      <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
+    </div>
+
+    <div class="form-label-group">
+        <input type="text" id="inputStudentID" name="inputStudentID" class="form-control" placeholder="Student ID" required autofocus>
+        <label for="inputEmail">Student ID</label>
+    </div>
+
+    <div class="form-label-group">
+        <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required>
+        <label for="inputPassword">Password</label>
+    </div>
+
+    <div class="form-label-group">
+        <input type="password" id="inputRetype" name="inputRetype" class="form-control" placeholder="Retype Password" required>
+        <label for="inputPassword">Retype Password</label>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div  class="alert alert-danger" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit" >Create</button>
+
+    <br/>
+    <div class="text-center">
+      <p>Already have account?<a class="mt-2 mb-3 p-2 text-blue" href="/login">Sign In</a></p>
+      <p class="mt-5 mb-3 text-muted text-center">&copy; 2021</p>
+    </div>
+  </form>
+
+</body>
+{% endblock %}

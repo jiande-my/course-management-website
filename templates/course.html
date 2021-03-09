@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Course
+{% endblock %}
+
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div  class="alert alert-danger" role="alert">
+            {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="container-fluid">
+    <h1>Course Offerings</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">Course ID</th>
+                <th scope="col">Name</th>
+                <!-- <th scope="col">Lecturer</th> -->
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Enroll</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <!-- Construct the rest of courses here -->
+            {% for course in courses %}
+            <tr>
+                <td scope='row'>{{ course["courseID"] }}</td>
+                <td>{{ course["courseName"] }}</td>
+                <td>{{ course["date"] }}</td>
+                <td>{{ course["time"] }}</td>
+                <!-- <td>{{ course[4] }}</td> -->
+                <td>
+                    <form action="{{url_for('section')}}" method="GET">
+                        <input type="hidden" name="courseID" value="{{ course['courseID'] }}">
+                        <!-- <input type="hidden" name="title" value="{{course[1]}}">
+                        <input type="hidden" name="section" value="{{course[2]}}"> -->
+                        <button>Section</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
