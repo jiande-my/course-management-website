@@ -9,6 +9,13 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
+
+"""
+==================================================================================================
+||        Data Base Setup                                                                       ||
+==================================================================================================
+"""
+
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://mzqzzqbbqshuyu:8dac9f5ddbfbc9f7556554c9d4d7b101acc45c7b2d8bce1c9ae90931f464c22f@ec2-54-205-61-191.compute-1.amazonaws.com:5432/d55vjv88et7bmh"
 app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
 
@@ -25,6 +32,12 @@ class registers(db.Model):
     courseID = db.Column(db.String(10), nullable=False)
     section = db.Column(db.Integer, nullable=False)
 
+
+"""
+==================================================================================================
+||        App Route                                                                             ||
+==================================================================================================
+"""
 @app.route('/')
 @app.route('/home')
 def home():
