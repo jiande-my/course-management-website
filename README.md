@@ -29,7 +29,7 @@
     - `export FLASK_APP=application.py`
     - `flask run`
 
-## Heroku
+## Website(Working)
 * https://fke-time-table.herokuapp.com/
 
 ## Resources
